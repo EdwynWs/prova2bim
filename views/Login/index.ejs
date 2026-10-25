@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>
+    SysLocação - PFS I
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Noto+Sans:300,400,500,600,700,800|PT+Mono:300,400,500,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="/template/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/template/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/349ee9c857.js" crossorigin="anonymous"></script>
+  <link href="/template/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="/template/css/corporate-ui-dashboard.css?v=1.0.0" rel="stylesheet" />
+
+  <style>
+    i {
+      margin-right: 7px;
+    }
+
+    .nav-link {
+      padding: 15px !important;
+      font-size: 16px !important;
+    }
+
+    .btn {
+      margin-bottom: 0 !important;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 800px;
+      justify-content: center;
+    }
+
+    .input-group-text {
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body class="g-sidenav-show  bg-gray-100">
+    <div class="login-logo">
+      <b>PFS I</b> - CINEFIPP
+    </div>
+    <!-- /.login-logo -->
+    <div class="card" style="min-width: 400px;">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">Faça o login no formulário abaixo:</p>
+
+        <form action="/login/validar" method="post">
+          <div class="input-group mb-3">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+          </div>
+          <div class="row">
+            <!-- /.col -->
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+        <div style="margin-top:10px">
+          <% if (typeof msg != 'undefined') { %>
+              <span style="text-align: center;"><%= msg %></span>
+          <% } %>
+        </div>
+        <!-- /.social-auth-links -->
+      </div>
+      <!-- /.login-card-body -->
+    </div>
+  </div>
+  <!--   Core JS Files   -->
+  <script src="/template/js/core/popper.min.js"></script>
+  <script src="/template/js/core/bootstrap.min.js"></script>
+  <script src="/template/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="/template/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="/template/js/plugins/chartjs.min.js"></script>
+  <script src="/template/js/plugins/swiper-bundle.min.js" type="text/javascript"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Control Center for Corporate UI Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="/template/js/corporate-ui-dashboard.min.js?v=1.0.0"></script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<div>
+    <h2>Salas cadastradas</h2>
+</div>
+
+<div class="table-responsive">
+    <table class="table align-items-center mb-0">
+        <thead class="bg-gray-100">
+            <th>Código</th>
+            <th>Nome</th>
+            <th>Capacidade</th>
+        </thead>
+
+        <tbody>
+            <% lista.map(function(value,index) { %>
+                <tr>
+                    <td><%= value.id %></td>
+                    <td><%= value.nome %></td>
+                    <td><%= value.capacidade %> assentos </td>
+                </tr>
+           <%}) %>
+        </tbody>
+    </table>
+</div>

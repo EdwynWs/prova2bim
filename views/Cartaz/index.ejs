@@ -1,0 +1,178 @@
+<!--
+=========================================================
+* Corporate UI - v1.0.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/corporate-ui
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>
+    CINEFIPP - Filmes em cartaz
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Noto+Sans:300,400,500,600,700,800|PT+Mono:300,400,500,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="/template/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="/template/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/349ee9c857.js" crossorigin="anonymous"></script>
+  <link href="/template/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="/template/css/corporate-ui-dashboard.css?v=1.0.0" rel="stylesheet" />
+
+  <style>
+    .item-imovel {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border: 1px solid #1e293b;
+        border-radius: 5px;
+        align-items: center;
+        text-align: center;
+        margin: 10px;
+    }
+
+    .item-imovel-valor {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+    }
+
+    @media  (max-width: 520px) {
+        .item-imovel {
+            flex-direction: column
+        }
+    }
+  </style>
+</head>
+
+<body class="g-sidenav-show bg-gray-100">
+  <main class="main-content max-height-vh-100 h-100">
+    <!-- Sidenav Top -->
+    <nav class="navbar bg-slate-900" style="height: 80px;">
+      <div class="container py-2" style="    align-items: baseline;">
+        <nav aria-label="breadcrumb">
+          <div class="d-flex align-items-center">
+            <span class="px-3 font-weight-bold text-lg text-white me-4">CINEFIPP</span>
+          </div>
+        </nav>
+        <div>
+            <a href="/admin" class="btn btn-dark">
+                Área restrita
+              </a>
+          </div>
+      </div>
+    </nav>
+    <!-- End Sidenav Top -->
+    <div class="pt-5 pb-6 bg-cover" style="background-image: url('/template/img/header-blue-purple.jpg')"></div>
+    <div class="container my-3 py-3">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="align-items-center">
+            <h3 class="mb-1 font-weight-bold" style="text-align: center;">
+              Filmes em cartaz
+            </h3>
+          </div>
+        </div>
+      </div>
+      <hr class="horizontal mb-3 dark">
+      <div class="container-fluid" style="display: flex;justify-content: center;">
+        <div class="card shadow" style="padding: 20px;min-height: 700px;width: 860px;">
+           <% lista.map(function(value,index) { %>
+                <div class="item-imovel">
+                    <div>
+                        <img src="/img/cinefipp.png" alt="imagem imovel" width="125">
+                    </div>
+                    <div>
+                        <h4><%= value.filmeTitulo %></h4>
+                        <div><%= new Date(value.dataHora).toLocaleString() %></div>
+                        <div><%= value.salaNome %></div>
+                    </div>
+                    <div>
+                        <div class="item-imovel-valor">
+                            R$<%=  value.preco %>
+
+                            <button data-bs-toggle="modal" data-bs-target="#modalReserva" class="btn btn-dark"><i class="fas fa-file-signature"></i> Comprar ingresso</button>
+                        </div>
+
+                    </div>
+                </div>
+           <%}) %>
+        </div>
+      </div>
+      <!-- Modal -->
+    <div class="modal fade modal-xl" id="modalReserva" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Comprar ingresso</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+                  <div class="form-group">
+            <label for="inputNome">Nome</label>
+            <input type="text" class="form-control" id="inputNome">
+        </div>
+        <div class="form-group">
+            <label for="inputEmail">Email</label>
+            <input type="text" class="form-control" id="inputEmail">
+        </div>
+           <div class="form-group">
+            <label for="inputData">Data e Hora</label>
+            <input type="datetime-local" class="form-control" id="inputData">
+          </div>
+        <div class="form-group">
+            <label for="inputAssento">Assento</label>
+            <input type="number" class="form-control" id="inputAssento">
+        </div>
+        <div class="form-group">
+            <label for="inputSessaoId">Sessão Id</label>
+            <input type="number" class="form-control" id="inputSessaoId">
+        </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" id="btnCadastrar" >Confirmar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+      <footer class="footer pt-3  ">
+        <div class="container-fluid">
+          <div class="row align-items-center justify-content-lg-between">
+            <div class="col-lg-6 mb-lg-0 mb-4">
+              <div class="copyright text-center text-xs text-muted text-lg-start">
+                Copyright
+                © <script>
+                  document.write(new Date().getFullYear())
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+  <!--   Core JS Files   -->
+  <script src="/template/js/core/popper.min.js"></script>
+  <script src="/template/js/core/bootstrap.min.js"></script>
+  <script src="/template/js/plugins/chartjs.min.js"></script>
+  <script src="/js/reserva/cadastrar.js"></script>
+  <!-- Control Center for Corporate UI Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="/template/js/corporate-ui-dashboard.min.js?v=1.0.0"></script>
+</body>
+
+</html>

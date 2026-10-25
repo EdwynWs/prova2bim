@@ -1,0 +1,33 @@
+
+<div>
+    <h2>Filmes cadastrados</h2>
+</div>
+
+<div>
+    <a style="margin-bottom: 15px !important;" href="/filme/cadastrar" class="btn btn-primary"><i class="fas fa-plus"></i> Cadastrar filme</a>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="bg-gray-100">
+                <th>Código</th>
+                <th>Titulo</th>
+                <th>Gênero</th>
+                <th>Ano de lançamento</th>
+                <th>Duração</th>
+                <th>Sinopse</th>
+            </thead>
+    
+            <tbody>
+                <% lista.map(function(value,index) { %>
+                    <tr>
+                        <td><%= value.id %></td>
+                        <td><%= value.titulo %></td>
+                        <td><%= value.generoDescricao %></td>
+                        <td><%= value.anoLancamento %></td>
+                        <td><%= value.duracao %> minutos</td>
+                        <td><button title="<%= value.sinopse %>" class="btn btn-primary">Ver sinopse</button></td>
+                    </tr>
+               <%}) %>
+            </tbody>
+        </table>
+    </div>
+</div>

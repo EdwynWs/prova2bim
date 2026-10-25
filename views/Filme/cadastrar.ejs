@@ -1,0 +1,41 @@
+
+<script src="/js/filmes/cadastrar.js"></script>
+<div>
+    <h1>Cadastrar Filme</h1>
+</div>
+
+<div>
+    <form>
+        <div class="form-group">
+            <label for="inputTitulo">Titulo</label>
+            <input type="text" class="form-control" id="inputTitulo">
+          </div>
+        <div class="form-group">
+            <label for="inputMin">Duração em minutos</label>
+            <input type="number" class="form-control" id="inputMin">
+        </div>
+        <div class="form-group">
+            <label for="inputSinopse">Sinopse</label>
+            <input type="text" class="form-control" id="inputSinopse">
+        </div>
+        <div class="form-group">
+            <label for="inputAno">Ano do Lançamento</label>
+            <input type="number" class="form-control" id="inputAno">
+        </div>
+        <div class="form-group">
+            <label for="selGen">Genero</label>
+            <select class="form-control" id="selGenero">
+              <option value="0">--Selecione--</option>
+              <% for(let i = 0; i<listarGenero.length; i++) { %>
+                  <option value="<%=listarGenero[i].generoId%>"><%= listarGenero[i].generoDescricao %></option>
+              <% } %>                 
+            </select>
+        </div>
+
+
+        <div>
+            <button class="btn btn-primary" type="button" id="btnCadastrar">Gravar</button>
+            <a href="/Filme" class="btn btn-default">Voltar</a>
+        </div>
+      </form>
+</div>
