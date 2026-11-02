@@ -1,38 +1,33 @@
-<script src="/js/reserva/listar.js"></script>
-<div>
-    <h2>Reservas cadastradas</h2>
-</div>
+  <script src="/js/sessao/listar.js"></script>
 
-<div>
-    <a style="margin-bottom: 15px !important;" href="/admin/reservas/cadastrar" class="btn btn-primary"><i class="fas fa-plus"></i> Cadastrar filme</a>
-    <div class="table-responsive">
-        <div class="form-group">
-        <label>Buscar reservas :</label>
-        <input type="text" id="txtBusca" class="form-control" placeholder="Digite o número do pedido ou o nome do produto">
-    </div>
-        <table class="table align-items-center mb-0">
-            <thead class="bg-gray-100">
+<h2>Sessões cadastradas</h2>
+<a class="btn btn-primary" style="max-width: 200px;" href="/admin/sessao/cadastrar">Nova Sessão</a>
+
+<hr>
+    <div>
+        <table class="table table-striped">
+            <thead>
                 <th>Id</th>
                 <th>Nome</th>
                 <th>Email</th>
                 <th>Data e Hora</th>
                 <th>Assento</th>
-                <th>Sessao Id</th>
+                <th>Sessão</th>
             </thead>
-    
             <tbody>
-                <% lista.map(function(value,index) { %>
+                <% for (let i = 0; i < listar.length; i++)  { %>
                     <tr>
-                        <td><%= value.id %></td>
-                        <td>R$ <%= value.Nome %> </td>
-                        <td><%= value.Email %> </td>
-                        <td><%= new Date(value.dataHora).toLocaleString() %></td>
-                        <td><%= value.assento %> </td>
-                        <td><%= value.sessao %> </td>
+                        <td><%= listar[i].id %></td>
+                        <td><%= listar[i].datahora %></td>
+                        <td><%= listar[i].preco %></td>
+                        <td><%= listar[i].filmNome %></td>
+                        <td><%= listar[i].salaNome %></td>
+                        <td><%= listar[i].salaNome %></td>
+                        <td>
+                            <button data-codigoexclusao="<%= listar[i].id %>" class="btn btn-danger btnExclusao">Excluir</button>
+                        </td>
                     </tr>
-               <%}) %>
+                <% } %>
             </tbody>
         </table>
     </div>
-    
-</div>

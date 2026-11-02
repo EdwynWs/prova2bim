@@ -1,32 +1,51 @@
-
 <script src="/js/sessao/cadastrar.js"></script>
-<div>
-    <h1>Cadastrar Sessão</h1>
-</div>
-
-<div>
-    <form>
-        <div class="form-group">
-            <label for="inputData">Data e Hora</label>
-            <input type="datetime-local" class="form-control" id="inputData">
-          </div>
-        <div class="form-group">
-            <label for="inputPreco">Preço</label>
-            <input type="number" class="form-control" id="inputPreco">
-        </div>
-        <div class="form-group">
-            <label for="inputFilmeId">Filme Id</label>
-            <input type="number" class="form-control" id="inputFilmeId">
-        </div>
-        <div class="form-group">
-            <label for="inputSalaId">Sala Id</label>
-            <input type="number" class="form-control" id="inputSalaId">
-        </div>
-
-
+<div class="container">
+    <h2>Cadastro de Sessão</h2>
+    <div>
+        <% if (typeof msg != "undefined") { %>             
+            <span  ><%= msg %></span>
+        <% } %>
+    </div>
+    <div>
         <div>
-            <button class="btn btn-primary" type="button" id="btnCadastrar">Gravar</button>
-            <a href="/admin/sessoes" class="btn btn-default">Voltar</a>
-        </div>
-      </form>
+            <div>
+                <div class="form-group">
+                    <label for="datahora" class="form-label">Data e Hora</label>
+                    <input type="date" class="form-control" id="datahora" name="datahora">
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="preco" class="form-label">Preço</label>
+                    <input type="text" class="form-control" id="preco" name="preco">
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="filme" class="form-label">Filme:</label>
+                    <select class="form-control" id="filme" name="filme">
+                        <option selected value="0">Selecione...</option>
+                        <% for(let i = 0; i<listar.length; i++) { %>
+                            <option value="<%= listar[i].filmId %>"><%= listar[i].filmNome %></option>
+                        <% } %>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div class="form-group">
+                    <label for="sala" class="form-label">Sala:</label>
+                    <select class="form-control" id="sala" name="sala">
+                        <option selected value="0">Selecione...</option>
+                        <% for(let i = 0; i<listar.length; i++) { %>
+                            <option value="<%= listar[i].salaId %>"><%= listar[i].salaNome %></option>
+                        <% } %>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-primary" id="btnCadastrar" type="button">Cadastrar</button>
+                <a class="btn btn-secondary" href="/admin/sessao">Voltar</a>
+            </div>
+        </div>  
+    </div>
 </div>

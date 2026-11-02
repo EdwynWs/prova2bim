@@ -8,13 +8,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function excluir() {
         let id = this.dataset.codigoexclusao;
+
         if(id != null) {
             if(confirm("Tem certeza que deseja excluir essa sessão?")) {
                 let obj = {
                     id: id
                 }
 
-                fetch('/admin/sessoes/excluir', {
+                fetch('/admin/sessao/excluir', {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

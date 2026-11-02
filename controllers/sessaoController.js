@@ -1,64 +1,47 @@
-const sessaoModel = require("../models/sessaoModel")
+const sessoesModel = require('../models/sessaoModel');
 
-class sessaoController{
+class sessaoModel{
 
     async sessaoView(req, res){
-        let sessao = new sessaoModel()
-        let lista = await sessao.listar()
-        res.render("sessao/listar", {lista: lista})
+        let lista = new sessoesModel()
+        let listar = await lista.listar();
+        res.render('sessao/listar', {listar});
     }
-
     async cadastrarView(req, res){
-        let sessao = new sessaoModel()
-        let lista = await sessao.listar()
-        res.render("sessao/cadastrar", {lista: lista})
-    }
-
-
-
-    async excluir(req, res){
-        let ok = true
-        if(req.body.id != ""){
-            let sessao = new sessaoModel();
-            ok = await sessao.excluir(req.body.id)
-        }else{
-            ok = false
-        }
-        res.send({ok: ok})
+        let lista = new sessoesModel()
+        let listar = await lista.listar();
+        res.render('sessao/cadastrar', {listar});
     }
 
     async cadastrar(req, res){
-        let msg = "";
-        let cor = "";
-        if(req.body.email != "" && req.body.senha != "" && req.body.nome != "" &&
-            req.body.perfil != '0') {
-            let usuario = new UsuarioModel(0, req.body.nome, req.body.email, req.body.senha, req.body.ativo, req.body.perfil);
-
-            let result = await usuario.cadastrar();
-
-            if(result) {
-                resp.send({
-                    ok: true,
-                    msg: "Usuário cadastrado com sucesso!"
-                });
-            }   
-            else{
-                resp.send({
-                    ok: false,
-                    msg: "Erro ao cadastrar usuário!"
-                });
+        let ok = false;
+        console.log(req.body);
+        if(req.body.datahora != '' && req.body.preco != '' && req.body.filme != '0' && req.body.sala != ''){
+            let cad = new sessoesModel(0, req.body.datahora, req.body.preco, req.body.filme, req.body.sala);
+            let cadastro = await cad.cadastrar();
+            if(cadastro){
+                res.send({ok: cadastro, msg: 'Sessão Cadastrada com sucesso'});
+            }else{
+                res.send({ok: false, msg: 'Erro ao cadastrar sessão'})
             }
+            
+        }else{
+            res.send({ok: false, msg: 'Erro ao cadastrar sessão'})
         }
-        else
-        {
-            resp.send({
-                ok: false,
-                msg: "Parâmetros preenchidos incorretamente!"
-            });
-        }
-
-
     }
 
+    async excluir(req, res){
+        if(req.body.id != null){
+            let sessao = new sessoesModel()
+            let ok = await sessao.excluir(req.body.id);
+            if(ok){
+                res.send({ok: true});
+            }else{
+                res.send({ok: false, msg: 'Erro ao excluir sessão'})
+            }
+        }else{
+            res.send({ok: false, msg: 'Sessão não encontrada'})
+        }
+    }
 }
-module.exports = sessaoController
+module.exports = sessaoModel;

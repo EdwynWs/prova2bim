@@ -3,44 +3,44 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("btnCadastrar").addEventListener("click", cadastrar);
 
     function limparValidacao() {
-        document.getElementById("inputData").style["border-color"] = "#ced4da";
-        document.getElementById("inputPreco").style["border-color"] = "#ced4da";
-        document.getElementById("inputFilmeId").style["border-color"] = "#ced4da";
-        document.getElementById("inputSalaId").style["border-color"] = "#ced4da";
+        document.getElementById("datahora").style["border-color"] = "#ced4da";
+        document.getElementById("preco").style["border-color"] = "#ced4da";
+        document.getElementById("filme").style["border-color"] = "#ced4da";
+        document.getElementById("sala").style["border-color"] = "#ced4da";
     }
 
     function cadastrar() {
         limparValidacao();
-        let data = document.querySelector("#inputData").value;
-        let preco = document.querySelector("#inputPreco").value;
-        let filmeId = document.querySelector("#inputFilmeId").value;
-        let salaId = document.querySelector("#inputSalaId").value;
+        let datahora = document.querySelector("#datahora").value;
+        let preco = document.querySelector("#preco").value;
+        let filme = document.querySelector("#filme").value;
+        let sala = document.querySelector("#sala").value;
 
         let listaErros = [];
-        if(data == "") {
-            listaErros.push("inputData");
+        if(datahora == "") {
+            listaErros.push("datahora");
         }
-        if(preco == 0) {
-            listaErros.push("inputPreco");
+        if(preco == "") {
+            listaErros.push("preco");
         }
-        if(filmeId == 0) {
-            listaErros.push("inputFilmeId");
+        if(filme == "") {
+            listaErros.push("filme");
         }
-        if(salaId == 0) {
-            listaErros.push("inputSalaId");
+        if(sala == 0) {
+            listaErros.push("sala");
         }
 
         if(listaErros.length == 0) {
             //enviar ao backend com fetch
 
             let obj = {
-                data: data,
+                datahora: datahora,
                 preco: preco,
-                filmeId: filmeId,
-                salaId: salaId,
+                filme: filme,
+                sala: sala,
             }
 
-            fetch("/admin/sessoes/cadastrar", {
+            fetch("/admin/sessao/cadastrar", {
                 method: 'POST',
                 body: JSON.stringify(obj),
                 headers: {
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(r=> {
                 if(r.ok) {
-                    window.location.href="/admin/sessoes";
+                    window.location.href="/admin/sessao";
                 }   
                 else {
                     alert(r.msg);

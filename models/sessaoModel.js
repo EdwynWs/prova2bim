@@ -1,78 +1,102 @@
-const { resourceUsage } = require("node:process")
-const database = require("../db/database")
-const db = new database()
+const banco = require('../db/database');
+const db = new banco();
 
 class sessaoModel{
 
-    #id    
-    #data
-    #preco
-    #filaId
-    #salaId
+    #id;
+    #datahora;
+    #preco;
+    #filmId;
+    #salaId;
+    #filmNome;
+    #salaNome;
 
     get id(){
-        return this.#id
+        return this.#id;
     }
-    set id(id){
-        this.#id = id
+    set id(value){
+        this.#id = value;
     }
 
-    get data(){
-        return this.#data
+    get datahora(){
+        return this.#datahora;
     }
-    set data(data){
-        this.#data = data
+    set datahora(value){
+        this.#datahora = value;
     }
 
     get preco(){
-        return this.#preco
+        return this.#preco;
     }
-    set preco(preco){
-        this.#preco = preco
+    set preco(value){
+        this.#preco = value;
     }
 
-    get filaId(){
-        return this.#filaId
+    get filmId(){
+        return this.#filmId;
     }
-    set filaId(filaId){
-        this.#filaId = filaId
+    set filmId(value){
+        this.#filmId = value;
     }
 
     get salaId(){
-        return this.#salaId
+        return this.#salaId;
     }
-    set salaId(salaId){
-        this.#salaId = salaId
+    set salaId(value){
+        this.#salaId = value;
     }
 
-    constructor(id, data, preco, filaId, salaId){
+    get filmNome(){
+        return this.#filmNome;
+    }
+    set filmNome(value){
+        this.#filmNome = value;
+    }
+
+    get salaNome(){
+        return this.#salaNome;
+    }
+    set salaNome(value){
+        this.#salaNome = value;
+    }
+
+    constructor(id, datahora, preco, filmId, salaId, filmNome, salaNome){
         this.#id = id;
-        this.#data = data;
+        this.#datahora = datahora;
         this.#preco = preco;
-        this.#filaId = filaId;
+        this.#filmId = filmId;
         this.#salaId = salaId;
+        this.#filmNome = filmNome;
+        this.#salaNome = salaNome;
     }
 
     async listar(){
-        let sql = 'select * from tb_sessoes'
-        let result = db.ExecutaComando(sql)
-        return result;
+        const sql = 'select * from tb_sessoes s inner join tb_filmes f on s.fil_id = f.fil_id inner join tb_salas sa on s.sal_id = sa.sal_id';
+        const rows = await db.ExecutaComando(sql);
+        let lista = [];
+        for(let i = 0; i < rows.length; i++){
+            let result = new sessaoModel(rows[i]['ses_id'], rows[i]['ses_datahora'], rows[i]['ses_preco'], rows[i]['fil_id'], rows[i]['sal_id'], rows[i]['fil_titulo'], rows[i]['sal_nome']);
+            lista.push(result);
     }
-
-    async excluir(id){
-        let sql = "delete from tb_sessoes where ses_id = ?"
-        let valores = [id];
-        let result = await db.ExecutaComandoNonQuery(sql, valores)
-        return result;
+        return lista;
     }
 
     async cadastrar(){
-        let sql = 'insert into tb_sessoes(ses_id, ses_datahora, ses_preco, fil_id, sal_id) values (?, ?, ?, ?, ?)'
-        let valores = [this.#id, this.#data, this.#preco, this.#filaId, this.#salaId]
-        let result = await db.ExecutaComando(sql, valores)
-        return result;
+        let sql = 'insert into tb_sessoes (ses_datahora, ses_preco, fil_id, sal_id) values(?,?,?,?)';
+        let valores = [this.#datahora, this.#preco, this.#filmId, this.#salaId];
+        let result = await db.ExecutaComandoNonQuery(sql, valores);
+        if(this.#id == 0){
+            return result;
+        }else{
+            console.log('id já cadastrado');
+        }
     }
 
-
+    async excluir(id){
+        let sql = 'delete from tb_sessoes where ses_id = ?';
+        let valores = [id];
+        let result = await db.ExecutaComandoNonQuery(sql, valores);
+        return result;
+    }
 }
-module.exports = sessaoModel
+module.exports = sessaoModel;

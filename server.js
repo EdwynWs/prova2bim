@@ -47,7 +47,7 @@ app.use('/admin/salas', salaRoute);
 
 app.use('/admin/usuarios', usuarioRota);
 
-app.use('/admin/sessoes', sessaoRota);
+app.use('/admin/sessao', sessaoRota);
 
 
 
